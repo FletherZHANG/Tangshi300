@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:orientation="vertical"
+    	android:background="@drawable/bg_image1"> 
+    	
+<LinearLayout  android:orientation="vertical" 
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="100px">    	   
+    <ListView android:id="@+id/android:list"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"          
+          android:cacheColorHint="#00000000"/>  
+</LinearLayout>
+        	
+ <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+     android:background="@drawable/ic_bg" android:layout_alignParentBottom="true" android:gravity="center_vertical" style="@android:style/ButtonBar">
+     <ImageButton android:id="@+id/BTN_FAVOR1" android:src="@drawable/ic_all" android:background="@drawable/button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" />
+     <ImageButton android:id="@+id/BTN_SEL" android:src="@drawable/ic_select" android:background="@drawable/button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" />
+     <ImageButton android:id="@+id/BTN_INFO" android:src="@drawable/ic_info" android:background="@drawable/button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" />
+     <ImageButton android:id="@+id/BTN_QUIT" android:src="@drawable/ic_quit" android:background="@drawable/button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" />
+</LinearLayout>
+ 
+</RelativeLayout>

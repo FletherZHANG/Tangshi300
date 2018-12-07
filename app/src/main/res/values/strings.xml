@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">唐诗三百首</string>
+    <string name="del_title_pingxi">【评析】</string>
+    <string name="del_title_zhushi">【注释】</string>
+    <string name="app_info">熙熙电子书之 唐诗三百首版本1.0</string>
+    <string name="app_info_msg">　　程序：熙熙爸爸;  美工：熙熙妈妈。特别为我们可爱的熙熙宝宝设计制作！\n\n Copyright @ flether.com</string>
+    <string name="str_ok">确定</string>
+    <string name="notification">没有找到相应的MP3文件！</string>
+</resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+xmlns:android="http://schemas.android.com/apk/res/android">    
+     <PreferenceCategory android:title="过滤列表中显示的诗人">
+          <ListPreference
+        	android:key="selPoetName"
+        	android:title="选择诗人"
+        	android:summary="选择全部诗人显示所有诗人的诗，否则仅显示被选择诗人的诗。"
+        	android:dialogTitle="选择诗人"
+        	android:entries="@array/poets_entry"
+        	android:entryValues="@array/poets_entry"
+        	android:defaultValue="全部诗人"
+    	 />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="过滤列表中显示的诗体">
+        <CheckBoxPreference
+            android:key="guShi5"
+            android:title="五言古诗"
+            android:summaryOn="显示五言古诗"
+            android:summaryOff="不显示五言古诗"
+            android:defaultValue="true"/>
+         <CheckBoxPreference
+            android:key="jueJu5"
+            android:title="五言绝句"
+            android:summaryOn="显示五言绝句"
+            android:summaryOff="不显示五言绝句"
+            android:defaultValue="true"/>
+          <CheckBoxPreference
+            android:key="yueFu5"
+            android:title="五言乐府"
+            android:summaryOn="显示五言乐府"
+            android:summaryOff="不显示五言乐府"
+            android:defaultValue="true"/>
+          <CheckBoxPreference
+            android:key="lvShi5"
+            android:title="五言律诗"
+            android:summaryOn="显示五言律诗"
+            android:summaryOff="不显示五言律诗"
+            android:defaultValue="true"/>
+
+          <CheckBoxPreference
+            android:key="guShi7"
+            android:title="七言古诗"
+            android:summaryOn="显示七言古诗"
+            android:summaryOff="不显示七言古诗"
+            android:defaultValue="true"/>
+          <CheckBoxPreference
+            android:key="jueJu7"
+            android:title="七言绝句"
+            android:summaryOn="显示七言绝句"
+            android:summaryOff="不显示七言绝句"
+            android:defaultValue="true"/>
+          <CheckBoxPreference
+            android:key="yueFu7"
+            android:title="七言乐府"
+            android:summaryOn="显示七言乐府"
+            android:summaryOff="不显示七言乐府"
+            android:defaultValue="true"/>
+          <CheckBoxPreference
+            android:key="lvShi7"
+            android:title="七言律诗"
+            android:summaryOn="显示七言律诗"
+            android:summaryOff="不显示七言律诗"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+       
+</PreferenceScreen>
+

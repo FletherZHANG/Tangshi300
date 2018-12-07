@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10px"
+    android:paddingRight="10px"
+    android:stretchColumns="1">
+    <TableRow>
+     	<TextView android:id="@+id/TAB_SHIMING"
+    		   	  android:textSize="16sp"
+    		      android:textColor="@drawable/black"/>
+     	<TextView android:id="@+id/TAB_SHIREN"
+     	   		  android:gravity="right"/>
+     </TableRow>
+     <TableRow>
+         <TextView android:text="" />
+     	 <TextView android:id="@+id/TAB_SHITI"
+                   android:gravity="right"/>
+     </TableRow>
+</TableLayout>
