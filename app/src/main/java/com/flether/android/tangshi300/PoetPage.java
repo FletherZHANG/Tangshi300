@@ -23,7 +23,8 @@ public class PoetPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.poet_page);	
+		setContentView(R.layout.poet_page);
+		MainPage.activityList.add(this);
 		
 		mScrollView = (ScrollView)findViewById(R.id.SCROLL_VIEW1);
 		mScrollView.setVerticalScrollBarEnabled(false);

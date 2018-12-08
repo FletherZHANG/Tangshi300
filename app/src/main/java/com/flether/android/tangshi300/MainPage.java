@@ -15,7 +15,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
+import android.app.Activity;
+import java.util.*;
 
 
 public class MainPage extends ListActivity {
@@ -27,12 +28,15 @@ public class MainPage extends ListActivity {
 	private ArrayList <String> mSelShiTi;
 	SimpleCursorAdapter mAdapterdata;
 	private Boolean mNeedUpdate = true;
+
+    public static List<Activity> activityList = new LinkedList();
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.poem_list);	
+		setContentView(R.layout.poem_list);
+        MainPage.activityList.add(this);
 			
 		mDbHelper = new DatabaseHelper(this);		
 		
@@ -176,9 +180,13 @@ public class MainPage extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				finish();
-				System.exit(0);
-				
+
+                for(Activity act:activityList)
+                {
+                    act.finish();
+                }
+                android.os.Process.killProcess(android.os.Process.myPid());
+
 			}
 		});
 	}

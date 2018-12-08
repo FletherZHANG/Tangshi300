@@ -14,6 +14,7 @@ public class BookCover extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cover_page);
+		MainPage.activityList.add(this);
 		
 	}
 	

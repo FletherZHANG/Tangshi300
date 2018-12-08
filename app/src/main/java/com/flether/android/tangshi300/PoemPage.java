@@ -54,7 +54,8 @@ public class PoemPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.poem_detail);	
+		setContentView(R.layout.poem_detail);
+        MainPage.activityList.add(this);
 		
 		mContext = PoemPage.this;  
 		

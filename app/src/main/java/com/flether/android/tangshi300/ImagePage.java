@@ -24,6 +24,7 @@ public class ImagePage extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image_page);
+		MainPage.activityList.add(this);
 
 		/* 取得屏幕分辨率大小 */
 		DisplayMetrics dm=new DisplayMetrics();
