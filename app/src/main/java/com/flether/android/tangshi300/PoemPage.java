@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,8 +20,10 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.util.Log;
 
 
+@SuppressWarnings("ALL")
 public class PoemPage extends Activity {
 
 	private DatabaseHelper mDbHelper;
@@ -39,8 +42,8 @@ public class PoemPage extends Activity {
     
     private ImageButton mBtn1;
     private ImageButton mBtn2;
-    
-    Mp3Player mReadPoem;
+
+    private MediaPlayer mPlayer;
     Handler mHandler;
     
     private Context mContext; 
@@ -102,19 +105,11 @@ public class PoemPage extends Activity {
 	    mZhuShi.setText(zhuShi);
 	    keyShiRen = shiRen;	 	
 	    
-	    // String mp3File = "Xixi//Tangshi//" + mImageName.substring(6) + ".wav";
-	    String mp3File = "Xixi//Tangshi//gaoshan.mp3";
-	    try {
-			mReadPoem = new Mp3Player(mp3File);
-			if (!mReadPoem.hasFile()){
-				showNotification();
-			}
-				
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	    
+
+	    mPlayer = new MediaPlayer();
+	    mPlayer = MediaPlayer.create(PoemPage.this, R.raw.gaoshan);
+	    Log.w("Tangshi300","MediaPlayer.create");
+
 	    setImageButtonListener();
 	    
 	    	    
@@ -137,24 +132,14 @@ public class PoemPage extends Activity {
 
 	}
 
-	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		
-		if (mReadPoem.isPlaying())	
-			mReadPoem.stop();
-		super.onPause();
-	}
 
 	Runnable r = new Runnable() {
-			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				while (true){
 					Message msg = new Message(); 
-					if (mReadPoem.isPlaying())
+					if (mPlayer.isPlaying())
 						msg.what = 1;
 					else
 						msg.what = 0;
@@ -169,95 +154,83 @@ public class PoemPage extends Activity {
 				}
 			}		
 	};
-	
-	private void setImageButtonListener(){	
-				
-		mBtn1.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub				
-				mCursor = mDbHelper.fetchData(mRowId);
-			    int favor = mCursor.getInt(mCursor.getColumnIndexOrThrow(DatabaseHelper.KEY_ISFAVOR));	
-			    mCursor.close();
-			  	if (favor == 1){
-			  		mDbHelper.updateData (mRowId, false);
-			  		mBtn1.setImageResource(R.drawable.ic_favor_add);
-			  	}
-			  	else {
-			  		mDbHelper.updateData (mRowId, true);
-			  		mBtn1.setImageResource(R.drawable.ic_favor_del);
 
-			  	}
-			}
-		});
-		
-		
-		ImageButton btn2 = (ImageButton)findViewById(R.id.BTN_PLAY); 		
-		btn2.setOnClickListener(new ImageButton.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				//TODO Auto-generated method stub			    
-				if (mReadPoem.isPlaying())	
-					mReadPoem.stop();
-				else
-					try {
-						mReadPoem.play();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}		
-			}
-		});
-						
-		
-		ImageButton btn3 = (ImageButton)findViewById(R.id.BTN_IMAGE); 		
-		btn3.setOnClickListener(new ImageButton.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Bundle bundle = new Bundle();	   		
-		    	bundle.putString(DatabaseHelper.KEY_YIWEN, mYiWen);
-		    	bundle.putString(DatabaseHelper.KEY_IMAGENAME, mImageName);
-		    	
-		        Intent intent = new Intent(PoemPage.this, ImagePage.class);    
-		        intent.putExtras(bundle);
-		        startActivity(intent); 	
-				
-			}
-		});
-		
-		ImageButton btn4 = (ImageButton)findViewById(R.id.BTN_POET); 		
-		btn4.setOnClickListener(new ImageButton.OnClickListener(){
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Bundle bundle = new Bundle();	   		
-		    	bundle.putString(DatabaseHelper.KEY_SHIREN, keyShiRen);
-		    	
-		        Intent intent = new Intent(PoemPage.this, PoetPage.class);    
-		        intent.putExtras(bundle);
-		        startActivity(intent); 	
-				
-			}
-		});
-	}
-	
-	private void showNotification(){
+    private void setImageButtonListener(){
 
-	    mNotification = new Notification(R.drawable.icon, getString(R.string.notification), System.currentTimeMillis());  
-   
-        // mNotification.defaults = Notification.DEFAULT_SOUND;  
-        mNotificationManager = (NotificationManager)this.getSystemService(NOTIFICATION_SERVICE);  
-		Intent mIntent = new Intent(mContext,InfoPage.class);  
-        mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);      
-        PendingIntent mContentIntent =PendingIntent.getActivity(mContext,0, mIntent, 0);
+        mBtn1.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                mCursor = mDbHelper.fetchData(mRowId);
+                int favor = mCursor.getInt(mCursor.getColumnIndexOrThrow(DatabaseHelper.KEY_ISFAVOR));
+                mCursor.close();
+                if (favor == 1){
+                    mDbHelper.updateData (mRowId, false);
+                    mBtn1.setImageResource(R.drawable.ic_favor_add);
+                }
+                else {
+                    mDbHelper.updateData (mRowId, true);
+                    mBtn1.setImageResource(R.drawable.ic_favor_del);
 
-        //REMOVE SOMETHING
-	    mNotificationManager.notify(0, mNotification);
- 	}
-	
+                }
+            }
+        });
+
+
+        ImageButton btn2 = (ImageButton)findViewById(R.id.BTN_PLAY);
+        btn2.setOnClickListener(new ImageButton.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //TODO Auto-generated method stub
+                if (mPlayer.isPlaying())
+                    mPlayer.stop();
+                else
+                    try {
+                        mPlayer.stop();
+                        mPlayer.prepare();
+                        mPlayer.start();
+                    } catch (IllegalStateException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+            }
+        });
+
+
+        ImageButton btn3 = (ImageButton)findViewById(R.id.BTN_IMAGE);
+        btn3.setOnClickListener(new ImageButton.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Bundle bundle = new Bundle();
+                bundle.putString(DatabaseHelper.KEY_YIWEN, mYiWen);
+                bundle.putString(DatabaseHelper.KEY_IMAGENAME, mImageName);
+
+                Intent intent = new Intent(PoemPage.this, ImagePage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+        ImageButton btn4 = (ImageButton)findViewById(R.id.BTN_POET);
+        btn4.setOnClickListener(new ImageButton.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Bundle bundle = new Bundle();
+                bundle.putString(DatabaseHelper.KEY_SHIREN, keyShiRen);
+
+                Intent intent = new Intent(PoemPage.this, PoetPage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+    }
 }
+

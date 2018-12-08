@@ -1188,6 +1188,10 @@
         "source": "F:\\Android\\tangshi3001\\app\\src\\main\\res\\drawable-hdpi\\image_016.jpg"
     },
     {
+        "merged": "F:\\Android\\tangshi3001\\app\\build\\intermediates\\res\\merged\\debug\\raw_gaoshan.mp3.flat",
+        "source": "F:\\Android\\tangshi3001\\app\\src\\main\\res\\raw\\gaoshan.mp3"
+    },
+    {
         "merged": "F:\\Android\\tangshi3001\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_image_188.jpg.flat",
         "source": "F:\\Android\\tangshi3001\\app\\src\\main\\res\\drawable-hdpi\\image_188.jpg"
     },
